@@ -6,7 +6,16 @@
 #include <unistd.h>
 #include <limits.h>
 #include <fcntl.h>
+//Conditional include for malloc
+#if defined(__linux__)
+#include <malloc.h>
+#elif defined(__APPLE__)
 #include <malloc/malloc.h>
+#elif defined(_WIN32)
+#include <malloc.h>
+#else
+#error "System is not supported
+#endif
 
 /*------------------*
  *   UTILS PACK     *
@@ -101,7 +110,7 @@
 /*------------------*
  *   EXTRA PACK     *
  *------------------*/
-
+    size_t mx_malloc_size(void *p);
     bool mx_isdigit(int c);
     bool mx_isspace(int c);
     int mx_tolower(int c);
