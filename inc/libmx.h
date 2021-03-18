@@ -14,7 +14,7 @@
 #elif defined(_WIN32)
 #include <malloc.h>
 #else
-#error "System is not supported
+#error "System is not supported"
 #endif
 
 /*------------------*

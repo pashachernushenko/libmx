@@ -33,8 +33,9 @@ $(NAME): $(OBJS)
 #executable for tests
 $(TEST): $(NAME)
 	@printf "\r\33[2KCompiling test cases... \33[0;33m$@\33[m"
-	$(CC) -o $@ $< $(CCFLAGS) $(SDIR)/$(TEST).c
+	@$(CC) $(CCFLAGS) -Wno-nonnull $(SDIR)/$(TEST).c $< -o $@ 
 	@printf "\r\33[2K\33[0;32mTests compiled succesfully!\33[m\n"
+	@./test
 
 .PHONY: clean uninstall reinstall
 #delete all files
