@@ -417,6 +417,147 @@ char *mx_replace_substr(const char *str, const char *sub, const char *replace);
 
 ## Memory pack
 
+### Fill memory
+
+Has the same behavior as the standard libc function `memset`.
+
+```c
+void *mx_memset(void *b, int c, size_t len);
+```
+
+### Copy memory
+
+Has the same behavior as the standard libc function `memcpy`.
+
+```c
+void *mx_memcpy(void *restrict dst, const void *restrict src, size_t n);
+```
+
+### Compare memory
+
+Has the same behavior as the standard stdlib function `memcmp`.
+
+```c
+int mx_memcmp(const void *s1, const void *s2, size_t n);
+```
+
+### Reallocate memory
+
+Has the same behavior as the standard stdlib function `realloc`.
+
+```c
+void *mx_realloc(void *ptr, size_t size);
+```
+
+### Non-overlapping memory copy
+
+Has the same behavior as the standard libc function `memmove`.
+
+```c
+void *mx_memmove(void *dst, const void *src, size_t len);
+```
+
+### Locate byte from end
+
+Similar to the function `mx_memchr`,  except that it searches in the opposite direction from the end of the bytes `n` points to `s` instead of directly from the beginning.
+
+```c
+void *mx_memrchr(const void *s, int c, size_t n);
+```
+
+### Copy memory to ...
+
+Has the same behavior as the standard stdlib function `memccpy`.
+
+```c
+void *mx_memccpy(void *restrict dst, const void* restrict src, int c, size_t n);
+```
+
+### Locate byte from start
+
+Has the same behavior as the standard stdlib function `memchr`.
+
+```c
+void *mx_memchr(const void *s, int c, size_t n);
+```
+
+### Locate block of bytes
+
+Has the same behavior as the standard libc function `memmem`.
+
+```c
+void *mx_memmem(const void *big, size_t big_len, const void *little, size_t little_len);
+```
+
 ## List pack
+
+Some functions to work with aingly linked list which contains void pointer.
+
+```c
+typedef struct s_list {
+  void *data;
+  struct s_list *next;
+}              t_list;
+```
+
+### Create node
+
+Creates a new node of a linked list `t_list`. The function assigns a parameter `data` to the list variable `data` and assigns `next` to `NULL`.
+
+```c
+t_list *mx_create_node(void *data);
+```
+
+### Push front
+
+Inserts a new node of `t_list` type with the given parameter `data` at the beginning of the linked list.
+
+```c
+void mx_push_front(t_list **list, void *data);
+```
+
+### Push back
+
+Inserts a node of `t_list` type with the given parameter `data` at the end of the linked list.
+
+```c
+void mx_push_back(t_list **list, void *data);
+```
+
+### Pop front
+
+Removes the first node of the linked list and frees the memory allocated for the node.
+
+```c
+void mx_pop_front(t_list **head);
+```
+
+### Pop back
+
+Removes the last node of the linked list and frees the memory allocated for the node.
+
+```c
+void mx_pop_back(t_list **head);
+```
+
+### Size of list
+
+Calculates the number of nodes in a linked list.
+
+Returns the amount of nodes in the linked list.
+
+```c
+int mx_list_size(t_list *list);
+```
+
+### Sort list
+
+Sorts a list's contents in ascending order. The function `cmp` returns `true` if `a > b` and `false` in other cases.
+
+Returns a pointer to the first element of the sorted list.
+
+```c
+t_list *mx_sort_list(t_list *lst, bool(*cmp)(void*, void*));
+```
 
 ## Extra pack
