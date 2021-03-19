@@ -4,15 +4,15 @@ Here should be intro text
 
 ## Table of contents
 
-## [Utils pack](#utils-pack)
+## [Utils pack](#utils-pack-1)
 
-## [Strings pack](#strings-pack)
+## [Strings pack](#strings-pack-1)
 
-## [Memory pack](#memory-pack)
+## [Memory pack](#memory-pack-1)
 
-## [List pack](#list-pack)
+## [List pack](#list-pack-1)
 
-## [Extra pack](#extra-pack)
+## [Extra pack](#extra-pack-1)
 
 ------------------------------------------
 
@@ -37,9 +37,11 @@ void mx_printstr(const char *s);
 ### Print array of strings
 
 Outputs:
+
 * an array of strings `arr` to the standard output with a delimiter `delim` between the elements of an array;
 * nothing if `arr` or `delim` do not exist;
 * a newline at the end of the output.
+
 `arr` must be `NULL`-terminated, in other cases the behavior is undefined.
 
 ```c
@@ -57,6 +59,7 @@ void mx_printint(int n);
 ### Decimal to hex
 
 Converts an `unsigned long` number into a hexadecimal string.
+
 Returns the number converted to a hexadecimal string.
 
 ```c
@@ -76,7 +79,9 @@ int mx_bubble_sort(int *arr, int size);
 ### Quick sort
 
 Sorts an array of integers in ascending order using the quick sort algorithm.
+
 Returns:
+
 * the number of swaps;
 * `-1` if `arr` does not exist.
 
@@ -86,6 +91,7 @@ int mx_quicksort(int *arr, int left, int right);
 
 ### Integer to ASCII
  Takes an integer and converts it to a string.
+ 
  Returns the number as a `NULL`-terminated string.
  
  ```c
@@ -101,7 +107,9 @@ void mx_print_unicode(wchar_t c);
 ```
 
 ### Exponentiation
+
 Computes `n` raised to the power of zero or a positive integer `pow`.
+
 Returns the result of `n` to the power of `pow`.
 
 ```c
@@ -109,7 +117,9 @@ double mx_pow(double n, unsigned int pow);
 ```
 
 ### Square root
+
 Computes the non-negative square root of `x`.
+
 Returns the square root of the number`x` if it is natural, and `0` otherwise.
 
 ```c
@@ -119,6 +129,7 @@ int mx_sqrt(int x);
 ### Hex to decimal
 
 Converts a hexadecimal string into an `unsigned long` number.
+
 Returns the `unsigned long` number.
 
 ```c
@@ -136,7 +147,9 @@ void mx_foreach(int *arr, int size, void(*f)(int));
 ### Binary search
 
 Searches the strings  in the array `arr` with the given `size` of array using the binary search algorithm.
+
 Returns:
+
 * the `index` of the found string in the array
 * `-1`  in case of errors or if the string has not been found
 * assigns the number of required iterations to the `count` pointer.
@@ -148,6 +161,259 @@ int mx_binary_search(char **arr, int size, const char *s, int *count);
 
 
 ## Strings pack
+
+### String length
+
+Has the same behavior as the corresponding standard libc function` strlen`.
+
+```c
+int mx_strlen(const char *s);
+```
+
+### Swap characters
+
+Swaps the characters of a string using pointers. Do nothing if `s1` or`s2` does not exist.
+
+```c
+void mx_swap_char(char *s1, char *s2);
+```
+
+### Copy string
+
+Has the same behavior as the standard libc function `strcpy`.
+
+```c
+char *mx_strcpy(char *dst, const char *src);
+```
+
+### Compare strings
+
+Has the same behavior as the standard libc function `strcmp`.
+
+```c
+int mx_strcmp(const char *s1, const char *s2);
+```
+
+### Concatenate strings
+
+Has the same behavior as the standard libc function `strcat`.
+
+```c
+char *mx_strcat(char *restricts1, const char *restricts2);
+```
+
+### New string
+
+Allocates memory for a string of a specific `size` and one additional byte for the terminating `'\0'`. Initializes each character with `'\0'`.
+
+Returns the string of a specific `size` and terminated by `'\0'` or `NULL` if creation fails.
+
+```c
+char *mx_strnew(const int size);
+```
+
+### Duplicate string
+
+Has the same behavior as the standard libc function `strdup`.
+
+```c
+char *mx_strdup(const char *s1);
+```
+
+### Join strings
+
+Concatenates strings `s1` and `s2` into a new string. Terminates the new string with `'\0'`.
+
+Returns: 
+
+* the string as a result of concatenation `s1` and `s2`;
+* the new copy of `non-NULL` parameter if one and only one of the parameters is `NULL`;
+* `NULL` if the concatenation fails.
+
+```c
+char *mx_strjoin(const char *s1, const char *s2);
+```
+
+### Delete string
+
+Takes a pointer to a string, frees string memory with `free` and sets the string to `NULL`.
+
+```c
+void mx_strdel(char **str);
+```
+
+### Delete array of strings
+
+Takes a pointer to a `NULL`-terminated array of strings, deletes the contents of the array, frees array memory with `free` and sets a pointer to `NULL`.
+
+```c
+void mx_del_strarr(char ***arr);
+```
+
+### File to string
+
+Takes a filename as a parameter and reads data from the file into a string.
+
+Returns:
+
+* `NULL`-terminated string;
+* `NULL`in case of any errors.
+
+```c
+char *mx_file_to_str(const char *file);
+```
+
+### Readline
+
+Reads the line from the given `fd` into the `lineptr` until it:
+
+* reaches a `delim` character. The delimiter must not be returned with `lineptr`;
+* reaches the End Of File (EOF);
+
+Returns:
+
+* the number of bytes that are written into `lineptr`;
+* `-1` if EOF is reached and there is nothing to write in `lineptr`;
+* `-2`  in case of errors or `fd` is invalid.
+
+```c
+int mx_read_line(char **lineptr, size_t buf_size, char delim, const int fd);
+```
+
+### Copy them all
+
+Has the same behavior as the standard libc function `strncpy`.
+
+```c
+char *mx_strncpy(char *dst, const char *src, int len);
+```
+
+### Reverse string
+
+Reverses a string using pointers. Do nothing if a string does not exist.
+
+```c
+void mx_str_reverse(char *s);
+```
+
+### Duplicate part of string
+
+Has the same behavior as the standard libc function `strndup`.
+
+```c
+char*mx_strndup(constchar*s1, size_tn);
+```
+
+### Locate substring
+
+Has the same behavior as the standard libc function `strstr`.
+
+```c
+char *mx_strstr(const char *haystack, const char *needle);
+```
+
+### Count words
+
+Counts words in a string.
+
+Returns the number of words in the string.
+
+```c
+int mx_count_words(const char *str, char c);
+```
+
+### Count substrings
+
+Counts the substrings `sub` in the string `str`.
+
+Returns:
+
+* the count of `subinstr`;
+* `0` if `sub` is an empty string;
+* `-1` if `str` and / or `sub` do not exist.
+
+```c
+int mx_count_substr(const char *str, const char *sub);
+```
+
+### Get character index
+
+Finds the index of the first occurrence of the character `c` in a string `str`.
+
+Returns:
+
+* the index of the first occurrence;
+* `-1` if no occurrence is found;
+* `-2` if the string does not exist.
+
+```c
+int mx_get_char_index(const char *str, char c);
+```
+
+### Get substring index
+
+Finds the index of a substring.
+
+Returns:
+
+* the index of the first character of `sub` in `str`;
+* `-1` if `sub` is not found in `str`;
+* `-2` if `str` or `sub` does not exist.
+
+```c
+int mx_get_substr_index(const char *str, const char *sub);
+```
+
+### Trim strings
+
+Takes a string, and creates a new one from it without whitespace characters at the beginning and the end of the string.
+
+Returns:
+
+* a new trimmed string;
+* `NULL` if the string `str` does not exist or string trim fails.
+
+```c
+char *mx_strtrim(const char *str);
+```
+
+### Clean string
+
+Takes a string, and creates a new one from it without whitespace characters in thebeginning and/or at the end of the string. Separates words in the new string with exactly one space character.
+
+Returns:
+
+* a new created string;
+* `NULL` if the string `str` does not exist or string creation fails.
+
+```c
+char *mx_del_extra_spaces(const char *str);
+```
+
+### Split string
+
+Converts a strings  to a `NULL`-terminated array of words.
+
+Returns:
+
+* the `NULL`-terminated array of strings;
+* `NULL` if the strings  does not exist or conversion fails.
+
+```c
+char **mx_strsplit(const char *s, char c);
+```
+
+### Replace substrings
+
+Replaces all occurrences of `sub` in `str` with `replace`.
+
+Returns:
+* a new string where substrings are replaced;
+* `NULL` if `sub` or `str` or `replace` does not exist.
+
+```c
+char *mx_replace_substr(const char *str, const char *sub, const char *replace);
+```
 
 ## Memory pack
 
