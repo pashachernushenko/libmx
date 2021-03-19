@@ -1,10 +1,10 @@
 # LIBMX Documentation
 
-The main idea staying behind this challenge is to create own static library of most common functions uning only some low-level cernel functions, such as: 'malloc, malloc_size/malloc_usable_size, free, open,read, write, close, exit'. 
+The main idea staying behind this challenge is to create own static library of most common functions uning only some low-level functions, such as: `malloc, malloc_size/malloc_usable_size, free, open,read, write, close, exit`. 
 
-Library is compiled with 'clang -std=c11 -Wall -Wextra -Werror -Wpedantic'.
+Library is compiled with `clang -std=c11 -Wall -Wextra -Werror -Wpedantic`.
 
-To comlile library simply use `make` or `make libmx.a` in your shell. There are also some test cases included, which can be compliled by `make test` and they executed by `./test`.
+To compile library simply use `make` or `make libmx.a` in your shell. There are also some test cases included, which can be compiled by `make test` and they executed by `./test`.
 
 Feel free to use it if you need, ask questions and so on. As this is mostly educational project, feedback is highly appreciated :)
 
@@ -14,13 +14,82 @@ Enjoy!
 
 ## [Utils pack](#utils-pack-1)
 
+* [Print character](#print-character)
+* [Print string](#print-string)
+* [Print array of strings](#print-array-of-strings)
+* [Print integer](#print-integer)
+* [Decimal to hex](#decimal-to-hex)
+* [Bubble sort](#bubble-sort)
+* [Quick sort](#quick-sort)
+* [Integer to ASCII](#integer-to-ascii)
+* [Print multibyte characters](#print-multibyte-characters)
+* [Exponentiation](#exponentiation)
+* [Square root](#square-root)
+* [Hex to decimal](#hex-to-decimal)
+* [For each](#for-each)
+* [Binary search](#binary-search)
+
 ## [Strings pack](#strings-pack-1)
+
+* [String length](#string-length)
+* [Swap characters](#swap-characters)
+* [Copy string](#copy-string)
+* [Compare strings](#compare-strings)
+* [Concatenate strings](#concatenate-strings)
+* [New string](#new-string)
+* [Duplicate string](#duplicate-string)
+* [Join strings](#join-strings)
+* [Delete string](#delete-string)
+* [Delete array of strings](#delete-array-of-strings)
+* [File to string](#file-to-string)
+* [Readline](#readline)
+* [Copy them all](#copy-them-all)
+* [Reverse string](#reverse-string)
+* [Duplicate part of string](#duplicate-part-of-string)
+* [Locate substring](#locate-substring)
+* [Print character](#print-character)
+* [Count words](#count-words)
+* [Count substrings](#count-substrings)
+* [Get character index](#get-character-index)
+* [Get substring index](#get-substring-index)
+* [Trim strings](#trim-strings)
+* [Clean string](#clean-string)
+* [Split string](#split-string)
+* [Replace substrings](#replace-substrings)
 
 ## [Memory pack](#memory-pack-1)
 
+* [Fill memory](#fill-memory)
+* [Copy memory](#copy-memory)
+* [Compare memory](#compare-memory)
+* [Reallocate memory](#reallocate-memory)
+* [Non-overlapping memory copy](#non-overlapping-memory-copy)
+* [Locate byte from end](#locate-byte-from-end)
+* [Copy memory to ...](#copy-memory-to-)
+* [Locate byte from start](#locate-byte-from-start)
+* [Locate block of bytes](#locate-block-of-bytes)
+
 ## [List pack](#list-pack-1)
 
+* [Create node](#create-node)
+* [Push front](#push-front)
+* [Push back](#push-back)
+* [Pop front](#pop-front)
+* [Pop back](#pop-back)
+* [Size of list](#size-of-list)
+* [Sort list](#sort-list)
+
 ## [Extra pack](#extra-pack-1)
+
+* [Allocated memory size](#allocated-memory-size)
+* [Is digit?](#is-digit)
+* [Is white-space?](#is-white-space)
+* [To lower case](#to-lower-case)
+* [To upper case](#to-upper-case)
+* [Is aplhabetic?](#is-aplhabetic)
+* [Locate character](#locate-character)
+* [ASCII to integer](#ascii-to-integer)
+* [Compare strings N](#compare-strings-n)
 
 ---
 
@@ -172,7 +241,7 @@ int mx_binary_search(char **arr, int size, const char *s, int *count);
 
 ### String length
 
-Has the same behavior as the corresponding standard libc function` strlen`.
+Has the same behavior as the corresponding standard libc function `strlen`.
 
 ```c
 int mx_strlen(const char *s);
@@ -180,7 +249,7 @@ int mx_strlen(const char *s);
 
 ### Swap characters
 
-Swaps the characters of a string using pointers. Do nothing if `s1` or`s2` does not exist.
+Swaps the characters of a string using pointers. Do nothing if `s1` or `s2` does not exist.
 
 ```c
 void mx_swap_char(char *s1, char *s2);
@@ -207,7 +276,7 @@ int mx_strcmp(const char *s1, const char *s2);
 Has the same behavior as the standard libc function `strcat`.
 
 ```c
-char *mx_strcat(char *restricts1, const char *restricts2);
+char *mx_strcat(char *restrict s1, const char *restrict s2);
 ```
 
 ### New string
@@ -235,7 +304,7 @@ Concatenates strings `s1` and `s2` into a new string. Terminates the new string 
 Returns: 
 
 * the string as a result of concatenation `s1` and `s2`;
-* the new copy of `non-NULL` parameter if one and only one of the parameters is `NULL`;
+* the new copy of non-`NULL` parameter if one and only one of the parameters is `NULL`;
 * `NULL` if the concatenation fails.
 
 ```c
@@ -265,7 +334,7 @@ Takes a filename as a parameter and reads data from the file into a string.
 Returns:
 
 * `NULL`-terminated string;
-* `NULL`in case of any errors.
+* `NULL` in case of any errors.
 
 ```c
 char *mx_file_to_str(const char *file);
@@ -309,7 +378,7 @@ void mx_str_reverse(char *s);
 Has the same behavior as the standard libc function `strndup`.
 
 ```c
-char*mx_strndup(constchar*s1, size_tn);
+char *mx_strndup(const char *s1, size_t n);
 ```
 
 ### Locate substring
@@ -336,9 +405,9 @@ Counts the substrings `sub` in the string `str`.
 
 Returns:
 
-* the count of `subinstr`;
+* the count of `sub` in `str`;
 * `0` if `sub` is an empty string;
-* `-1` if `str` and / or `sub` do not exist.
+* `-1` if `str` and/or `sub` do not exist.
 
 ```c
 int mx_count_substr(const char *str, const char *sub);
