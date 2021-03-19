@@ -1,6 +1,14 @@
 # LIBMX Documentation
 
-Here should be intro text
+The main idea staying behind this challenge is to create own static library of most common functions uning only some low-level cernel functions, such as: 'malloc, malloc_size/malloc_usable_size, free, open,read, write, close, exit'. 
+
+Library is compiled with 'clang -std=c11 -Wall -Wextra -Werror -Wpedantic'.
+
+To comlile library simply use `make` or `make libmx.a` in your shell. There are also some test cases included, which can be compliled by `make test` and they executed by `./test`.
+
+Feel free to use it if you need, ask questions and so on. As this is mostly educational project, feedback is highly appreciated :)
+
+Enjoy!
 
 ## Table of contents
 
@@ -14,7 +22,7 @@ Here should be intro text
 
 ## [Extra pack](#extra-pack-1)
 
-------------------------------------------
+---
 
 ## Utils pack
 
@@ -158,7 +166,7 @@ Returns:
 int mx_binary_search(char **arr, int size, const char *s, int *count);
 ```
 
-
+---
 
 ## Strings pack
 
@@ -415,6 +423,8 @@ Returns:
 char *mx_replace_substr(const char *str, const char *sub, const char *replace);
 ```
 
+---
+
 ## Memory pack
 
 ### Fill memory
@@ -489,6 +499,8 @@ Has the same behavior as the standard libc function `memmem`.
 void *mx_memmem(const void *big, size_t big_len, const void *little, size_t little_len);
 ```
 
+---
+
 ## List pack
 
 Some functions to work with aingly linked list which contains void pointer.
@@ -560,4 +572,80 @@ Returns a pointer to the first element of the sorted list.
 t_list *mx_sort_list(t_list *lst, bool(*cmp)(void*, void*));
 ```
 
+---
+
 ## Extra pack
+
+### Allocated memory size
+
+Platform-indepent function which return size of previously allocated memory.
+
+Special credits to https://stackoverflow.com/users/1424877/quuxplusone
+
+```c
+size_t mx_malloc_size(void *p);
+```
+
+### Is digit?
+
+Has the same behaviour as the standard libc function `isdigit`.
+
+```c
+bool mx_isdigit(int c);
+```
+
+### Is white-space?
+
+Has the same behaviour as the standard libc function `isspace`.
+
+```c
+bool mx_isspace(int c);
+```
+
+### To lower case
+
+Has the same behaviour as the standard libc function `tolower`.
+
+```c
+int mx_tolower(int c);
+```
+
+### To upper case
+
+Has the same behaviour as the standard libc function `toupper`.
+
+```c
+int mx_toupper(int c);
+```
+
+### Is alphabetic?
+
+Has the same behaviour as the standard libc function `isalpha`.
+
+```c
+bool mx_isalpha(int c);
+```
+
+### Locate character
+
+Create a function that has the same behaviour as the standard libc function `strchr`.
+
+```c
+char *mx_strchr(const char *s, int c);
+```
+
+### ASCII to integer
+
+Converts an ASCII string to an integer as the standard libc function `atoi` does.
+
+```c
+int mx_atoi(const char *str);
+```
+
+### Compare strings N
+
+Has the same behaviour as the standard libc function `strncmp`.
+
+```c
+int mx_strncmp(const char *s1, const char *s2, int n);
+```
